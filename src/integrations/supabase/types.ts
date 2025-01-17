@@ -77,6 +77,27 @@ export type Database = {
           },
         ]
       }
+      global_settings: {
+        Row: {
+          created_at: string | null
+          id: string
+          product_fee_percentage: number
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          product_fee_percentage?: number
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          product_fee_percentage?: number
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       payment_links: {
         Row: {
           amount: number
@@ -295,21 +316,18 @@ export type Database = {
         Row: {
           created_at: string | null
           id: string
-          product_fee_percentage: number
           updated_at: string | null
           user_id: string
         }
         Insert: {
           created_at?: string | null
           id?: string
-          product_fee_percentage?: number
           updated_at?: string | null
           user_id: string
         }
         Update: {
           created_at?: string | null
           id?: string
-          product_fee_percentage?: number
           updated_at?: string | null
           user_id?: string
         }
