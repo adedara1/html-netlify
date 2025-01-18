@@ -19,4 +19,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Ajout de la configuration pour copier le fichier _redirects
+  publicDir: 'public',
 }));
