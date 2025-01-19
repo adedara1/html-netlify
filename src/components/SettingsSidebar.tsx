@@ -22,6 +22,7 @@ const settingsMenuItems = [
   { label: "ProductPageLayout", path: "/product/218cd2b9-cd2a-4cfb-846e-2ac4f8b825c3" },
   { label: "Aperçu de page", path: "/page-apercu" },
   { label: "Produits", path: "/products-pages", icon: Store },
+  { label: "Produits PawaPay", path: "/product-page", icon: Store },
   { label: "Avis", path: "/reviews", icon: MessageSquare },
   { label: "Facebook Pixel", path: "/facebook-pixel", icon: BarChart },
 ];
