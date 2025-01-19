@@ -19,11 +19,12 @@ import EditeurPage from "@/pages/EditeurPage";
 import DonneesPage from "@/pages/DonneesPage";
 import UsersDataUpdate from "@/pages/UsersDataUpdate";
 import PaymentPreview from "@/pages/PaymentPreview";
+import PublicPaymentPage from "@/pages/PublicPaymentPage";
 import ProtectedRoute from "@/components/routes/ProtectedRoute";
 import PublicRoute from "@/components/routes/PublicRoute";
 
 // Routes that should not display the sidebar
-const noSidebarRoutes = ['/product', '/auth', '/admins', '/profile'];
+const noSidebarRoutes = ['/product', '/auth', '/admins', '/profile', '/725872d8-1cbe-4723-9d42-21e6ba1151ec'];
 
 // Routes that should display the settings sidebar
 const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu'];
@@ -43,6 +44,7 @@ const AppContent = () => {
           <Route path="/admins" element={<PublicRoute><AdminAuth /></PublicRoute>} />
           <Route path="/profile" element={<ProtectedRoute><ProfileForm /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProductPage />} />
+          <Route path="/725872d8-1cbe-4723-9d42-21e6ba1151ec" element={<PublicPaymentPage />} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/blog" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
           <Route path="/products-pages" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />
