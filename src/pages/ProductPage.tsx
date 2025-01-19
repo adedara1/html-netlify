@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import PawapayProductForm from "@/components/PawapayProductForm";
+import ProductForm from "@/components/ProductForm";
 import ProductCard from "@/components/product/ProductCard";
 import ProductListView from "@/components/product/ProductListView";
+import { Product } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import { Trash2, Pencil, Plus, LayoutGrid, List } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
-import { PawapayProduct } from "@/types/product";
 
 const ProductPage = () => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -18,19 +18,19 @@ const ProductPage = () => {
   const navigate = useNavigate();
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["pawapay-products"],
+    queryKey: ["products"],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Non authentifié");
 
       const { data, error } = await supabase
-        .from("pawapay_products")
+        .from("products")
         .select("*")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data as PawapayProduct[];
+      return data as Product[];
     },
   });
 
@@ -46,7 +46,7 @@ const ProductPage = () => {
   const handleDelete = async () => {
     try {
       const { error } = await supabase
-        .from("pawapay_products")
+        .from("products")
         .delete()
         .in("id", selectedProducts);
 
@@ -86,7 +86,7 @@ const ProductPage = () => {
     <div className="space-y-8">
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Créer un nouveau produit PawaPay</h1>
+          <h1 className="text-2xl font-bold">Créer un nouveau produit</h1>
           <Button 
             onClick={() => setShowForm(!showForm)}
             className="gap-2"
@@ -95,7 +95,7 @@ const ProductPage = () => {
             {showForm ? "Fermer" : "Créer un produit"}
           </Button>
         </div>
-        {showForm && <PawapayProductForm />}
+        {showForm && <ProductForm />}
       </div>
 
       <div>
