@@ -2,10 +2,10 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
-import { Product } from "@/types/product";
+import { AnyProduct } from "@/types/product";
 
 interface ProductCardProps {
-  product: Product;
+  product: AnyProduct;
   isSelected?: boolean;
   onSelect?: () => void;
 }
@@ -52,7 +52,7 @@ const ProductCard = ({ product, isSelected, onSelect }: ProductCardProps) => {
       )}
       <div className="p-4 space-y-4">
         <h3 className="font-semibold text-lg">{product.name}</h3>
-        <p className="text-xl font-bold text-blue-600">{product.amount} FCFA</p>
+        <p className="text-xl font-bold text-blue-600">{product.amount} {product.currency_code || 'FCFA'}</p>
         
         <div className="space-y-2">
           <div className="flex items-center justify-between">

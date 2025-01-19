@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Trash2, Pencil, Plus, LayoutGrid, List } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useNavigate } from "react-router-dom";
+import { PawapayProduct } from "@/types/product";
 
 const ProductPage = () => {
   const [selectedProducts, setSelectedProducts] = useState<string[]>([]);
@@ -29,7 +30,7 @@ const ProductPage = () => {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data;
+      return data as PawapayProduct[];
     },
   });
 

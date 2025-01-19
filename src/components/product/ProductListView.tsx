@@ -1,10 +1,10 @@
-import { Product } from "@/types/product";
+import { AnyProduct } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import { Copy } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 interface ProductListViewProps {
-  products: Product[];
+  products: AnyProduct[];
   selectedProducts: string[];
   onProductSelect: (productId: string) => void;
 }
@@ -59,7 +59,7 @@ const ProductListView = ({ products, selectedProducts, onProductSelect }: Produc
                 {product.description}
               </td>
               <td className="px-6 py-4 text-sm font-semibold text-blue-600">
-                {product.amount} FCFA
+                {product.amount} {'currency_code' in product ? product.currency_code : 'FCFA'}
               </td>
               <td className="px-6 py-4 text-sm text-gray-600">
                 {new Date(product.created_at).toLocaleDateString()}
