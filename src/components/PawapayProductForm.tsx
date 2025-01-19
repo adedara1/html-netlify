@@ -23,20 +23,25 @@ const PawapayProductForm = () => {
 
   useEffect(() => {
     const fetchPawapayConfigurations = async () => {
-      const { data, error } = await supabase
-        .from('pawapay_configurations')
-        .select('*')
-        .single();
-      
-      if (error) {
+      try {
+        const { data, error } = await supabase
+          .from('pawapay_configurations')
+          .select('*')
+          .limit(1); // Get just the first configuration
+        
+        if (error) {
+          console.error('Error fetching PawaPay configurations:', error);
+          return;
+        }
+        
+        if (data && data.length > 0) {
+          const config = data[0];
+          setCountryCode(config.country_code);
+          setCurrencyCode(config.currency_code);
+          setCorrespondentCode(config.correspondent_code);
+        }
+      } catch (error) {
         console.error('Error fetching PawaPay configurations:', error);
-        return;
-      }
-      
-      if (data) {
-        setCountryCode(data.country_code);
-        setCurrencyCode(data.currency_code);
-        setCorrespondentCode(data.correspondent_code);
       }
     };
     
