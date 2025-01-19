@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import ProductForm from "@/components/ProductForm";
+import PawapayProductForm from "@/components/PawapayProductForm";
 import ProductCard from "@/components/product/ProductCard";
 import ProductListView from "@/components/product/ProductListView";
-import { Product } from "@/types/product";
 import { Button } from "@/components/ui/button";
 import { Trash2, Pencil, Plus, LayoutGrid, List } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
@@ -18,19 +17,19 @@ const ProductPage = () => {
   const navigate = useNavigate();
 
   const { data: products, isLoading } = useQuery({
-    queryKey: ["products"],
+    queryKey: ["pawapay-products"],
     queryFn: async () => {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) throw new Error("Non authentifié");
 
       const { data, error } = await supabase
-        .from("products")
+        .from("pawapay_products")
         .select("*")
         .eq("user_id", user.id)
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      return data as Product[];
+      return data;
     },
   });
 
@@ -46,7 +45,7 @@ const ProductPage = () => {
   const handleDelete = async () => {
     try {
       const { error } = await supabase
-        .from("products")
+        .from("pawapay_products")
         .delete()
         .in("id", selectedProducts);
 
@@ -86,7 +85,7 @@ const ProductPage = () => {
     <div className="space-y-8">
       <div>
         <div className="flex justify-between items-center mb-4">
-          <h1 className="text-2xl font-bold">Créer un nouveau produit</h1>
+          <h1 className="text-2xl font-bold">Créer un nouveau produit PawaPay</h1>
           <Button 
             onClick={() => setShowForm(!showForm)}
             className="gap-2"
@@ -95,7 +94,7 @@ const ProductPage = () => {
             {showForm ? "Fermer" : "Créer un produit"}
           </Button>
         </div>
-        {showForm && <ProductForm />}
+        {showForm && <PawapayProductForm />}
       </div>
 
       <div>
