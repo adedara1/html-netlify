@@ -27,7 +27,7 @@ import PublicRoute from "@/components/routes/PublicRoute";
 const noSidebarRoutes = ['/product', '/auth', '/admins', '/profile', '/725872d8-1cbe-4723-9d42-21e6ba1151ec'];
 
 // Routes that should display the settings sidebar
-const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu'];
+const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu', '/product-page'];
 
 const AppContent = () => {
   const location = useLocation();
@@ -47,6 +47,7 @@ const AppContent = () => {
           <Route path="/725872d8-1cbe-4723-9d42-21e6ba1151ec" element={<PublicPaymentPage />} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/blog" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
+          <Route path="/product-page" element={<ProtectedRoute><ProductPage /></ProtectedRoute>} />
           <Route path="/products-pages" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />
           <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
           <Route path="/transaction" element={<ProtectedRoute><Transaction /></ProtectedRoute>} />

@@ -14,6 +14,7 @@ import {
   Menu,
   Cog,
   Store,
+  CreditCard as PaymentIcon,
 } from "lucide-react";
 
 export const menuItems = [
@@ -25,6 +26,7 @@ export const menuItems = [
     submenu: [
       { icon: Settings, label: "Réglages", path: "/settings" },
       { icon: Cog, label: "Configuration", path: "/configuration" },
+      { icon: PaymentIcon, label: "PawaPay Products", path: "/product-page" },
     ]
   },
   { icon: Package, label: "Produit", path: "/blog" },
