@@ -10,11 +10,10 @@ export interface Product {
   long_description: string | null;
   amount: number;
   image_url: string | null;
-  payment_link_id: string | null;
+  payment_link_id?: string | null; // Made optional with ?
   user_id: string | null;
   created_at: string;
   updated_at: string;
-  payment_links?: PaymentLink;
 }
 
 export interface PawapayProduct {

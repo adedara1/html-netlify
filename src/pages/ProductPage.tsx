@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import ProductForm from "@/components/PawapayProductForm";
+import PawapayProductForm from "@/components/PawapayProductForm";
 import ProductCard from "@/components/product/ProductCard";
 import ProductListView from "@/components/product/ProductListView";
 import { PawapayProduct } from "@/types/product";
@@ -95,7 +95,7 @@ const ProductPage = () => {
             {showForm ? "Fermer" : "Créer un produit"}
           </Button>
         </div>
-        {showForm && <ProductForm />}
+        {showForm && <PawapayProductForm />}
       </div>
 
       <div>
