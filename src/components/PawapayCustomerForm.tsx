@@ -6,14 +6,14 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { CreditCard } from "lucide-react";
 
-interface CustomerInfoFormProps {
+interface PawapayCustomerFormProps {
   amount: number;
   description: string;
   paymentLinkId: string;
   onClose: () => void;
 }
 
-const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: CustomerInfoFormProps) => {
+const PawapayCustomerForm = ({ amount, description, paymentLinkId, onClose }: PawapayCustomerFormProps) => {
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerFirstName, setCustomerFirstName] = useState("");
   const [customerLastName, setCustomerLastName] = useState("");
@@ -67,7 +67,7 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
         return;
       }
 
-      console.log("Initiating payment with customer info:", {
+      console.log("Initiating PawaPay payment with customer info:", {
         amount,
         description,
         customerEmail,
@@ -77,12 +77,11 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
       });
 
       const { data: paymentData, error: paymentError } = await supabase.functions.invoke(
-        "create-payment-link",
+        "initiate-pawapay-payment",
         {
           body: {
             amount,
             description,
-            payment_type: "product",
             customer: {
               email: customerEmail,
               first_name: customerFirstName,
@@ -94,22 +93,22 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
       );
 
       if (paymentError) {
-        console.error("Payment error:", paymentError);
+        console.error("PawaPay payment error:", paymentError);
         throw paymentError;
       }
 
-      console.log("Payment initiated successfully:", paymentData);
+      console.log("PawaPay payment initiated successfully:", paymentData);
 
       if (!paymentData.payment_url) {
-        throw new Error("URL de paiement manquante dans la réponse");
+        throw new Error("URL de paiement PawaPay manquante dans la réponse");
       }
 
       window.location.href = paymentData.payment_url;
     } catch (error) {
-      console.error("Error initiating payment:", error);
+      console.error("Error initiating PawaPay payment:", error);
       toast({
         title: "Erreur",
-        description: "Une erreur est survenue lors de l'initiation du paiement",
+        description: "Une erreur est survenue lors de l'initiation du paiement PawaPay",
         variant: "destructive",
       });
     } finally {
@@ -170,7 +169,7 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? "Traitement..." : "Payer avec Moneroo"}
+            {isLoading ? "Traitement..." : "Payer avec PawaPay"}
           </Button>
         </form>
       </Card>
@@ -182,7 +181,7 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
             className="w-full md:w-[500px] bg-green-600 hover:bg-green-700 text-base"
           >
             <CreditCard className="mr-2 h-5 w-5" />
-            Payer {formatAmount(amount)} FCFA avec Moneroo
+            Payer {formatAmount(amount)} FCFA avec PawaPay
           </Button>
         </div>
       )}
@@ -190,4 +189,4 @@ const CustomerInfoForm = ({ amount, description, paymentLinkId, onClose }: Custo
   );
 };
 
-export default CustomerInfoForm;
+export default PawapayCustomerForm;
