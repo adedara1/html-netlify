@@ -30,6 +30,19 @@ const noSidebarRoutes = ['/product', '/auth', '/admins', '/profile', '/725872d8-
 // Routes that should display the settings sidebar
 const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu', '/product-page', '/page-layout'];
 
+// Default product for PageLayout preview
+const defaultProduct = {
+  id: "preview-layout",
+  name: "Sample Product",
+  description: "This is a sample product for layout preview",
+  long_description: "This is a longer description that shows how the layout handles more content...",
+  amount: 5000,
+  image_url: "/placeholder.svg",
+  payment_link_id: null,
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString()
+};
+
 const AppContent = () => {
   const location = useLocation();
   const shouldShowSidebar = !noSidebarRoutes.some(route => location.pathname.startsWith(route));
@@ -46,7 +59,7 @@ const AppContent = () => {
           <Route path="/profile" element={<ProtectedRoute><ProfileForm /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/725872d8-1cbe-4723-9d42-21e6ba1151ec" element={<PublicPaymentPage />} />
-          <Route path="/page-layout" element={<ProtectedRoute><PageLayout /></ProtectedRoute>} />
+          <Route path="/page-layout" element={<ProtectedRoute><PageLayout product={defaultProduct} /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/blog" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
           <Route path="/products-pages" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />
