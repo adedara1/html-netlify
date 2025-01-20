@@ -2,7 +2,6 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { Product } from "@/types/product";
 import { SimplePage } from "@/types/simple-page";
 import ProductDetails from "../product/ProductDetails";
-import CustomerInfoForm from "@/components/CustomerInfoForm";
 import { Tag } from "lucide-react";
 
 interface PageLayoutProps {
@@ -42,12 +41,6 @@ const PageLayout = ({ product }: PageLayoutProps) => {
                 amount={product.amount}
                 imageUrl={product.image_url}
               />
-              <CustomerInfoForm
-                amount={product.amount}
-                description={product.description || product.name}
-                paymentLinkId={product.payment_link_id || ""}
-                onClose={() => {}}
-              />
             </div>
           </div>
         ) : (
@@ -68,14 +61,6 @@ const PageLayout = ({ product }: PageLayoutProps) => {
                 long_description={'long_description' in product ? product.long_description : null}
                 amount={product.amount}
                 imageUrl={product.image_url}
-              />
-            </div>
-            <div className="sticky top-6">
-              <CustomerInfoForm
-                amount={product.amount}
-                description={product.description || product.name}
-                paymentLinkId={product.payment_link_id || ""}
-                onClose={() => {}}
               />
             </div>
           </div>
