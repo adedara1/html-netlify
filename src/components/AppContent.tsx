@@ -20,6 +20,7 @@ import DonneesPage from "@/pages/DonneesPage";
 import UsersDataUpdate from "@/pages/UsersDataUpdate";
 import PaymentPreview from "@/pages/PaymentPreview";
 import PublicPaymentPage from "@/pages/PublicPaymentPage";
+import PageLayout from "@/components/layouts/PageLayout";
 import ProtectedRoute from "@/components/routes/ProtectedRoute";
 import PublicRoute from "@/components/routes/PublicRoute";
 
@@ -27,7 +28,7 @@ import PublicRoute from "@/components/routes/PublicRoute";
 const noSidebarRoutes = ['/product', '/auth', '/admins', '/profile', '/725872d8-1cbe-4723-9d42-21e6ba1151ec'];
 
 // Routes that should display the settings sidebar
-const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu', '/product-page'];
+const settingsRoutes = ['/configuration', '/editeur', '/donnees', '/page-apercu', '/product-page', '/page-layout'];
 
 const AppContent = () => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const AppContent = () => {
           <Route path="/profile" element={<ProtectedRoute><ProfileForm /></ProtectedRoute>} />
           <Route path="/product/:id" element={<ProductPage />} />
           <Route path="/725872d8-1cbe-4723-9d42-21e6ba1151ec" element={<PublicPaymentPage />} />
+          <Route path="/page-layout" element={<ProtectedRoute><PageLayout /></ProtectedRoute>} />
           <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
           <Route path="/blog" element={<ProtectedRoute><Blog /></ProtectedRoute>} />
           <Route path="/products-pages" element={<ProtectedRoute><ProductsPage /></ProtectedRoute>} />

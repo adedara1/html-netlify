@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Menu, X, Store, MessageSquare, BarChart, CreditCard } from "lucide-react";
+import { Menu, X, Store, MessageSquare, BarChart, CreditCard, Layout } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 
@@ -20,6 +20,7 @@ const settingsMenuItems = [
   { label: "Données", path: "/donnees" },
   { label: "Page de paiement", path: "/product/218cd2b9-cd2a-4cfb-846e-2ac4f8b825c3" },
   { label: "ProductPageLayout", path: "/product/218cd2b9-cd2a-4cfb-846e-2ac4f8b825c3" },
+  { label: "PageLayout", path: "/page-layout", icon: Layout },
   { label: "Page de paiement publique", path: "/725872d8-1cbe-4723-9d42-21e6ba1151ec", icon: CreditCard },
   { label: "Aperçu de page", path: "/page-apercu" },
   { label: "Produits", path: "/product-page", icon: Store },
